@@ -18,7 +18,7 @@ public class Proj1 {
 		Random r = new Random();
 
 		//play again? variable - extra credit
-		char play = 'y';
+		char playAgain;
 
 		//dealer and player card values
 		int dealer1 = 0;
@@ -39,11 +39,8 @@ public class Proj1 {
 		boolean validInputPlay;
 
 		//player name input
-		/*
 		System.out.print("Enter player's name: ");
 		String player = s.nextLine();
-		 */
-		String player = "jazz";
 
 		do {
 			char move;
@@ -175,6 +172,10 @@ public class Proj1 {
 				System.out.print("\n\tAce of "); 
 				player2 = 11;
 				pTotal = player1 + player2;
+				if(pTotal > 21) {
+					player2 = 1;
+					pTotal = player1 + player2;
+				}
 				break;
 			case 11:
 				System.out.print("\n\tJack of "); 
@@ -220,6 +221,10 @@ public class Proj1 {
 						System.out.print("Ace of "); 
 						player3 = 11;
 						pTotal = player1 + player2 + player3;
+						if(pTotal > 21) {
+							player3 = 1;
+							pTotal = player1 + player2 + player3;
+						}
 						break;
 					case 11:
 						System.out.print("Jack of "); 
@@ -237,6 +242,7 @@ public class Proj1 {
 						pTotal = player1 + player2 + player3;
 						break;
 					default: 
+						pTotal = player1 + player2 + player3;
 						System.out.print(player3 + " of ");
 					}
 
@@ -258,12 +264,51 @@ public class Proj1 {
 				}
 			}while(!validInputMove); //end do-while
 
-			if(dTotal < 17) {
+			if(dTotal < 17 && dealer3 == 1) {
+				System.out.print("\nDealer draws: Ace of ");
+				switch(r.nextInt(4)) {
+				case 0: System.out.print("Clubs"); break;
+				case 1: System.out.print("Spades"); break;
+				case 2: System.out.print("Hearts"); break;
+				case 3: System.out.print("Diamonds"); break;
+				}
 				
-				
+				dealer3 = 11;
+				dTotal = dealer1 + dealer2 + dealer3;
+				if(dTotal > 21) {
+					dealer3 = 1;
+					dTotal = dealer1 + dealer2 + dealer3;
+				}
+			}
+			else if(dTotal < 17) {
+				dTotal = dealer1 + dealer2 + dealer3;
+				System.out.print("\nDealer draws: " + dealer3 + " of ");
+				switch(r.nextInt(4)) {
+				case 0: System.out.print("Clubs"); break;
+				case 1: System.out.print("Spades"); break;
+				case 2: System.out.print("Hearts"); break;
+				case 3: System.out.print("Diamonds"); break;
+				}
+			}
+			else {
+				System.out.print("\nDealer stays.");
 			}
 			
-			play = 'p';
-		}while(play == 'y'); //end do-while
+			System.out.print("\n\n" + player + "'s Total: " + pTotal);
+			System.out.print("\nDealer's Total: " + dTotal);
+			
+			
+			if((dTotal > pTotal && dTotal <= 21) || dTotal == pTotal || (dTotal < 22 && pTotal > 21)) {
+				System.out.print("\nDealer wins.");
+				dW++;
+			}
+			else if((pTotal > dTotal && pTotal < 22) ||(pTotal < dTotal && dTotal > 21)){
+				System.out.print("\n" + player + " wins!");
+				pW++;
+			}
+			
+			System.out.print("Would you like to play again? Type 'RETRY' to play again or type 'QUIT' to exit: ");
+			playAgain = s.next().toUpperCase();
+		}while(playAgain == "RETRY"); //end do-while
 	} //end main
 } //end class
