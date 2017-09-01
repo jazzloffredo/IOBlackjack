@@ -277,7 +277,7 @@ public class Proj1 {
 						validInputMove = false;
 						System.out.print("\nPlease enter a valid input (s) or (h): ");
 					}
-				}while(!validInputMove); //end do-while
+				}while(!validInputMove);
 //**********************END VALID INPUT VERIFICATION DO-WHILE************************\\
 
 
@@ -301,20 +301,27 @@ public class Proj1 {
 					}
 				}
 				else if(dTotal < 17) {
-					dTotal = dealer1 + dealer2 + dealer3;
+
 					System.out.print("\nDealer draws: ");
 					switch(dealer3) {
 					case 11:
 						System.out.print("Jack of ");
+						dealer3 = 10;
+						dTotal = dealer1 + dealer2 + dealer3;
 						break;
 					case 12:
 						System.out.print("Queen of ");
+						dealer3 = 10;
+						dTotal = dealer1 + dealer2 + dealer3;
 						break;
 					case 13:
 						System.out.print("King of ");
+						dealer3 = 10;
+						dTotal = dealer1 + dealer2 + dealer3;
 						break;
 					default:
 						System.out.print(dealer3 + " of ");
+						dTotal = dealer1 + dealer2 + dealer3;
 					}
 
 					switch(r.nextInt(4)) {
@@ -357,7 +364,7 @@ public class Proj1 {
 						playAgain = s.next().charAt(0);
 					}
 				}while(!validInputPlay);
-			}while(playAgain == 'r'); //end main do-while loop
+			}while(playAgain == 'r' || playAgain == 'R'); //end main do-while loop
 		}
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~END OF PLAY MODE~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\\
 
@@ -382,6 +389,22 @@ public class Proj1 {
 				player2 = Integer.parseInt(s.next());
 
 				dTotal = dealer1 + dealer2;
+				if(dealer1 == 1) {
+					dealer1 = 11;
+					dTotal = dealer1 + dealer2;
+					dealer1 = 1;
+				}
+				
+				if(dealer2 == 1) {
+					dealer2 = 11;
+					dTotal = dealer1 + dealer2;
+					dealer2 = 1;
+				}
+				
+				if(dealer1 == 1 && dealer2 == 1) {
+					dTotal = 22;
+				}
+				
 				if(dTotal < 17) {
 					System.out.print("\nDealer Total < 17 - Enter a value for Dealer Card 3: ");
 					dealer3 = Integer.parseInt(s.next());	
@@ -616,22 +639,27 @@ public class Proj1 {
 					}
 				}
 				else if(dTotal < 17) {
-					dTotal = dealer1 + dealer2 + dealer3;
 					System.out.print("\nDealer draws: ");
 					switch(dealer3) {
 					case 11:
 						System.out.print("Jack of ");
+						dealer3 = 10;
+						dTotal = dealer1 + dealer2 + dealer3;
 						break;
 					case 12:
 						System.out.print("Queen of ");
+						dealer3 = 10;
+						dTotal = dealer1 + dealer2 + dealer3;
 						break;
 					case 13:
 						System.out.print("King of ");
+						dealer3 = 10;
+						dTotal = dealer1 + dealer2 + dealer3;
 						break;
 					default:
 						System.out.print(dealer3 + " of ");
+						dTotal = dealer1 + dealer2 + dealer3;
 					}
-
 					switch(r.nextInt(4)) {
 					case 0: System.out.print("Clubs"); break;
 					case 1: System.out.print("Spades"); break;
@@ -672,7 +700,7 @@ public class Proj1 {
 						playAgain = s.next().charAt(0);
 					}
 				}while(!validInputPlay);
-			}while(playAgain == 'r'); //end main do-while loop
+			}while(playAgain == 'r' || playAgain == 'R'); //end main do-while loop
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~END OF TEST MODE~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\\
 		}
 		//print wins for each
