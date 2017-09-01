@@ -18,7 +18,7 @@ public class Proj1 {
 		Random r = new Random();
 
 		//play again? variable - extra credit
-		char playAgain;
+		char playAgain = 'r';
 
 		//dealer and player card values
 		int dealer1 = 0;
@@ -36,12 +36,14 @@ public class Proj1 {
 
 		//user input valid
 		boolean validInputMove = false;
-		boolean validInputPlay;
+		boolean validInputPlay = false;
 
 		//player name input
+		/*
 		System.out.print("Enter player's name: ");
 		String player = s.nextLine();
-
+		*/
+		String player = "jazz";
 		do {
 			char move;
 
@@ -272,7 +274,7 @@ public class Proj1 {
 				case 2: System.out.print("Hearts"); break;
 				case 3: System.out.print("Diamonds"); break;
 				}
-				
+
 				dealer3 = 11;
 				dTotal = dealer1 + dealer2 + dealer3;
 				if(dTotal > 21) {
@@ -282,7 +284,21 @@ public class Proj1 {
 			}
 			else if(dTotal < 17) {
 				dTotal = dealer1 + dealer2 + dealer3;
-				System.out.print("\nDealer draws: " + dealer3 + " of ");
+				System.out.print("\nDealer draws: ");
+				switch(dealer3) {
+				case 11:
+					System.out.print("Jack of ");
+					break;
+				case 12:
+					System.out.print("Queen of ");
+					break;
+				case 13:
+					System.out.print("King of ");
+					break;
+				default:
+					System.out.print(dealer3 + " of ");
+				}
+				
 				switch(r.nextInt(4)) {
 				case 0: System.out.print("Clubs"); break;
 				case 1: System.out.print("Spades"); break;
@@ -293,11 +309,11 @@ public class Proj1 {
 			else {
 				System.out.print("\nDealer stays.");
 			}
-			
+
 			System.out.print("\n\n" + player + "'s Total: " + pTotal);
 			System.out.print("\nDealer's Total: " + dTotal);
-			
-			
+
+
 			if((dTotal > pTotal && dTotal <= 21) || dTotal == pTotal || (dTotal < 22 && pTotal > 21)) {
 				System.out.print("\nDealer wins.");
 				dW++;
@@ -306,9 +322,21 @@ public class Proj1 {
 				System.out.print("\n" + player + " wins!");
 				pW++;
 			}
-			
-			System.out.print("Would you like to play again? Type 'RETRY' to play again or type 'QUIT' to exit: ");
-			playAgain = s.next().toUpperCase();
-		}while(playAgain == "RETRY"); //end do-while
+
+			System.out.print("\n\nWould you like to play again? "
+					+ "\nType 'R' to play again."
+					+ "\nType 'Q' to exit.\n");
+			playAgain = s.next().charAt(0);
+			do {
+				if(playAgain == 'r' || playAgain == 'R' || playAgain == 'Q' || playAgain == 'q') {
+					validInputPlay = true;
+				}
+				else {
+					System.out.print("\nPlease enter either 'R' to retry or 'Q' to quit:");
+					playAgain = s.next().charAt(0);
+				}
+			}while(!validInputPlay);
+		}while(playAgain == 'r'); //end do-while
+		System.out.println("Dealer wins: " + dW + " - Player wins: " + pW);
 	} //end main
 } //end class
