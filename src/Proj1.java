@@ -70,7 +70,6 @@ public class Proj1 {
 				player1 = r.nextInt(13) + 1;
 				player2 = r.nextInt(13) + 1;
 				player3 = r.nextInt(13) + 1;
-
 				dTotal = dealer1 + dealer2;
 				pTotal = player1 + player2;
 
@@ -330,7 +329,7 @@ public class Proj1 {
 					case 3: System.out.print("Diamonds"); break;
 					}
 				}
-				else if(pTotal > dTotal && dTotal > 16) {
+				else if((move == 'h' && (pTotal - player3) > dTotal && dTotal > 16) || (move == 's' && pTotal > dTotal && dTotal > 16)) {
 					System.out.print("\nDealer is forced to draw: ");
 					switch(dealer3) {
 					case 11:
@@ -394,6 +393,9 @@ public class Proj1 {
 						validInputPlay = false;
 					}
 				}while(!validInputPlay);
+				if(playAgain == 'r' || playAgain == 'R') {
+					System.out.print("\n...STARTING NEW GAME...\n");
+				}
 			}while(playAgain == 'r' || playAgain == 'R'); //end main do-while loop
 		}
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~END OF PLAY MODE~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\\
@@ -695,7 +697,7 @@ public class Proj1 {
 					case 3: System.out.print("Diamonds"); break;
 					}
 				}
-				else if(pTotal > dTotal && dTotal > 16) {
+				else if((move == 'h' && (pTotal - player3) > dTotal && dTotal > 16) || (move == 's' && pTotal > dTotal && dTotal > 16)) {
 					System.out.print("Dealer is forced to draw. Enter Value: ");
 					dealer3 = Integer.parseInt(s.next());
 					switch(dealer3) {
@@ -759,6 +761,9 @@ public class Proj1 {
 						validInputPlay = false;
 					}
 				}while(!validInputPlay);
+				if(playAgain == 'r' || playAgain == 'R') {
+					System.out.print("\n...STARTING NEW GAME...\n");
+				}
 			}while(playAgain == 'r' || playAgain == 'R'); //end main do-while loop
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~END OF TEST MODE~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\\
 		}
